@@ -67,16 +67,16 @@ bool isNumber(char c){
 }
 
 /*
-	'-' = -1/-8
-	'(' = -2
-	')' = -3
+	'(' = -1
+	')' = -2
+	'-' = -3/-8
 	'^' = -4
 	'*' = -5
 	'/' = -6
 	'+' = -7
 */
 
-Queue encodePostfix(string infix){
+Queue encodeInfix(string infix){
 	Queue infix_encoded;
 	char temp;
 	string numStr;
@@ -93,14 +93,14 @@ Queue encodePostfix(string infix){
 			}
 			if (temp == '-'){
 				if (infix[i-1] == '('){
-					infix_encoded.enqueue(-1);
+					infix_encoded.enqueue(-3);
 				}else{
 					infix_encoded.enqueue(-8);
 				}
 			}else if (temp == '('){
-				infix_encoded.enqueue(-2);
+				infix_encoded.enqueue(-1);
 			}else if (temp == ')'){
-				infix_encoded.enqueue(-3);
+				infix_encoded.enqueue(-2);
 			}else if (temp == '^'){
 				infix_encoded.enqueue(-4);
 			}else if (temp == '*'){
@@ -133,7 +133,7 @@ int main(){
 	Queue infixQ;
 	infix = "7 - 34 *((-22)-1/5)+10";
 	infix = removeWhiteSpace(infix);
-	infixQ = encodePostfix(infix);
+	infixQ = encodeInfix(infix);
 	cout<<infix<<endl;
 	printlnQueue(infixQ);
 	return 0;
